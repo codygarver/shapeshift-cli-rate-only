@@ -235,3 +235,22 @@ class ShapeShift:
 				elif tx_response[1]['status'] == 'failed':
 					break
 				sleep(30)
+
+	def get_rateonly(self, pair):
+		"""
+		Get the rate for a specfied pair
+		"""
+
+		url = "/".join((self.base_url, "rate", pair))
+		response = self.session.get(url).json()
+
+		# check for unknown pair
+		if response.get('error', None):
+			print(response['error'])
+			return (False, None)
+		else:
+			have, want = response['pair'].upper().split('_')
+			print('{}'.format(
+					response['rate']
+				))
+			return (True, response['rate'])

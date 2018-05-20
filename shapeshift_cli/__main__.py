@@ -7,6 +7,7 @@ Usage:
 	shapeshift-cli info <have_currency> <want_currency>
 	shapeshift-cli ls
 	shapeshift-cli rate <have_currency> <want_currency>
+	shapeshift-cli rateonly <have_currency> <want_currency>
 	shapeshift-cli shift [-f=<amount> | -a] [-e=<email>] <have_currency> <want_currency> <refund_address> <withdraw_address>
 	shapeshift-cli status <address>
 	shapeshift-cli time <address>
@@ -45,6 +46,8 @@ def main():
 			client.get_coins()
 		elif options['rate']:
 			client.get_rate("_".join((options['<have_currency>'], options['<want_currency>'])))
+		elif options['rateonly']:
+			client.get_rateonly("_".join((options['<have_currency>'], options['<want_currency>'])))
 		elif options['shift']:
 			if options['-f']:
 				try:
